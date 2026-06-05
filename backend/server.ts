@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
+import { extractText, getDocumentProxy } from "unpdf";
 import { createRequire } from "module";
 import { pathToFileURL } from "url";
 const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
 import dotenv from "dotenv";
 import { getDb, hashPassword } from "./src/mongodb-server.js";
@@ -189,8 +189,9 @@ export async function createApp() {
 
       if (lowerName.endsWith(".pdf")) {
         try {
-          const parsed = await pdfParse(buffer);
-          const cleanText = (parsed.text || "").replace(/\u0000/g, " ").trim();
+          const pdf = await getDocumentProxy(new Uint8Array(buffer));
+          const { text } = await extractText(pdf, { mergePages: true });
+          const cleanText = (text || "").replace(/\u0000/g, " ").trim();
           res.json({ text: cleanText });
           return;
         } catch (pdfErr: any) {
