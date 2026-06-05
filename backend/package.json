@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "esbuild server.ts --bundle --platform=node --format=esm --external:mongodb --external:cors --external:express --external:dotenv --external:mammoth --sourcemap --outfile=dist/server.js",
+    "build": "esbuild server.ts --bundle --platform=node --format=esm --external:mongodb --external:cors --external:express --external:dotenv --external:mammoth --external:pdf-parse --sourcemap --outfile=dist/server.js",
     "start": "node dist/server.js"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "express": "^4.21.2",
     "mammoth": "^1.12.0",
     "mongodb": "^7.2.0",
-    "pdfjs-dist": "^4.0.0"
+    "pdf-parse": "^2.4.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
