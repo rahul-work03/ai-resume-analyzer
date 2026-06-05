@@ -1,14 +1,14 @@
 {
   "version": 2,
   "functions": {
-    "api/index.ts": {
+    "backend/api/index.ts": {
       "maxDuration": 60
     }
   },
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/index.ts"
+      "destination": "/backend/api/index.ts"
     }
   ]
 }
